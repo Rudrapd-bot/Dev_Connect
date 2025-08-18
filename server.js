@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 
+import authRoutes from "./routes/authRoutes.js";
+
 dotenv.config();
 const app = express();
 
@@ -15,7 +17,9 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected ✅"))
   .catch(err => console.log(err));
 
-// Test route
+// Routes
+app.use("/api/auth", authRoutes);
+
 app.get("/", (req, res) => {
   res.send("DevConnect API is running 🚀");
 });
